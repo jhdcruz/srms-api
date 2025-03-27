@@ -1,10 +1,10 @@
 openapi: "3.0.3"
 info:
-  title: "Application API"
-  description: "Application API"
+  title: "SRMS API"
+  description: "DSource Inc. Official Service Request Management System API."
   version: "1.0.0"
 servers:
-  - url: "http://0.0.0.0:8080"
+  - url: "http://0.0.0.0:3011"
 paths:
   /:
     get:

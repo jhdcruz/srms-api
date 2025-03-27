@@ -1,11 +1,10 @@
 package utils
 
-import org.bouncycastle.jce.provider.BouncyCastleProvider
-import org.jetbrains.annotations.Nullable
-import java.security.Provider
-import java.security.Security
-import java.security.MessageDigest
-import java.math.BigInteger
+import java.security.SecureRandom
+import java.security.spec.KeySpec
+import javax.crypto.SecretKey
+import javax.crypto.SecretKeyFactory
+import javax.crypto.spec.PBEKeySpec
 
 private const val ALGORITHM = "PBKDF2WithHmacSHA512"
 private const val ITERATIONS = 120_000
@@ -24,6 +23,7 @@ fun generateRandomSalt(): ByteArray {
   return salt
 }
 
+@OptIn(ExperimentalStdlibApi::class)
 fun generateHash(password: String, salt: String): String {
   val combinedSalt = "$salt$SECRET".toByteArray()
   val factory: SecretKeyFactory = SecretKeyFactory.getInstance(ALGORITHM)

@@ -1,9 +1,11 @@
-package ph.dsi.srms.api
+package schema
 
+import java.time.LocalDateTime
 import kotlinx.coroutines.Dispatchers
 import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.javatime.datetime
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 import org.jetbrains.exposed.sql.transactions.transaction
 
@@ -12,10 +14,11 @@ data class User(
     val id: Int,
     val name: String,
     val email: String,
+    val password: String,
     val role: String,
-    val organization: String
-    val createdAt: String,
-    val updatedAt: Datetime
+    val organization: String,
+    val createdAt: LocalDateTime,
+    val updatedAt: String,
 )
 
 @Serializable
@@ -24,9 +27,9 @@ data class AuthUser(val email: String, val password: String)
 class UserService(database: Database) {
     object Users : Table() {
         val id = integer("id").autoIncrement()
-        val name = varchar("name", length = 150)
+        val name = varchar("name", length = 100)
         val email = varchar("email", length = 60)
-        val password = varchar("password", length = 254)
+        val password = varchar("password", length = 200)
         val role = varchar("role", length = 20)
         val organization = varchar("organization", length = 100)
         val createdAt = datetime("created_at")
