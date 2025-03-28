@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.ktor)
     alias(libs.plugins.kotlin.plugin.serialization)
     alias(libs.plugins.ktlint)
-    alias(libs.plugins.detekt)
 }
 
 group = "ph.dsi"
@@ -28,7 +27,6 @@ dependencies {
     implementation(libs.exposed.jdbc)
     implementation(libs.exposed.json)
     implementation(libs.exposed.java.time)
-    implementation(libs.h2)
     implementation(libs.ktor.server.swagger)
     implementation(libs.ktor.server.compression)
     implementation(libs.ktor.server.cors)
@@ -44,4 +42,6 @@ dependencies {
 
     // Third-party
     implementation(libs.bouncycastle.provider)
+    implementation(libs.hikaricp)
+    runtimeOnly(libs.actian.ingres)
 }

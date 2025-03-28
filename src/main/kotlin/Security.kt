@@ -11,11 +11,10 @@ import io.ktor.server.response.*
 
 fun Application.configureSecurity() {
     install(CSRF) {
-        // tests Origin is an expected value
-        allowOrigin("http://localhost:8080")
+//        allowOrigin("http://localhost:8080")
 
         // tests Origin matches Host header
-        originMatchesHost()
+//        originMatchesHost()
 
         // custom header checks
         checkHeader("X-CSRF-Token")

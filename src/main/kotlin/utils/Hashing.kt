@@ -9,28 +9,27 @@ import javax.crypto.spec.PBEKeySpec
 private const val ALGORITHM = "PBKDF2WithHmacSHA512"
 private const val ITERATIONS = 120_000
 private const val KEY_LENGTH = 256
-private const val SECRET = environment.config.property("jwt.secret").getString()
 
 /**
  * Utility class for hashing operations
  */
 
 fun generateRandomSalt(): ByteArray {
-  val random = SecureRandom.getInstance("PKCS11")
-  val salt = ByteArray(16)
-  random.nextBytes(salt)
+    val random = SecureRandom.getInstance("PKCS11")
+    val salt = ByteArray(16)
+    random.nextBytes(salt)
 
-  return salt
+    return salt
 }
 
 @OptIn(ExperimentalStdlibApi::class)
-fun generateHash(password: String, salt: String): String {
-  val combinedSalt = "$salt$SECRET".toByteArray()
-  val factory: SecretKeyFactory = SecretKeyFactory.getInstance(ALGORITHM)
+fun generateHash(secret: String, password: String, salt: String): String {
+    val combinedSalt = "$salt$secret".toByteArray()
+    val factory: SecretKeyFactory = SecretKeyFactory.getInstance(ALGORITHM)
 
-  val spec: KeySpec = PBEKeySpec(password.toCharArray(), combinedSalt, ITERATIONS, KEY_LENGTH)
-  val key: SecretKey = factory.generateSecret(spec)
-  val hash: ByteArray = key.encoded
+    val spec: KeySpec = PBEKeySpec(password.toCharArray(), combinedSalt, ITERATIONS, KEY_LENGTH)
+    val key: SecretKey = factory.generateSecret(spec)
+    val hash: ByteArray = key.encoded
 
-  return hash.toHexString()
+    return hash.toHexString()
 }

@@ -1,7 +1,7 @@
 ktor:
     application:
         modules:
-            - ph.dsi.ApplicationKt.module
+            - ph.dsi.srms.ApplicationKt.module
     deployment:
         port: 3011
 jwt:
@@ -11,8 +11,8 @@ jwt:
     audience: "srms"
     realm: "DSI SRMS"
 db:
-    hostname: ""
-    port: ""
-    name: ""
-    username: ""
-    password: ""
+    host: "localhost"
+    port: "AX7"
+    name: "srmsdb::srmsdb"
+    username: "ingres"
+    password: "a1a1"
