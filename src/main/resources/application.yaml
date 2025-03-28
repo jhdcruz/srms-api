@@ -11,8 +11,8 @@ jwt:
     audience: "srms"
     realm: "DSI SRMS"
 db:
-    host: "localhost"
+    host: "LAPTOP-14C4E4AT:AX7"
     port: "AX7"
-    name: "srmsdb::srmsdb"
+    name: "srmsdb"
     username: "ingres"
     password: "a1a1"
